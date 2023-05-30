@@ -1,7 +1,7 @@
 name: simulation
 root: ./
 startup_window: mapplan
-pre_window: export UAV_NAME=uav1; export RUN_TYPE=simulation; export UAV_TYPE=m690; export WORLD_FILE=./custom_configs/world.yaml; export SENSORS="garmin_down"; export ODOMETRY_TYPE="gps"
+pre_window: export UAV_NAME=uav1; export RUN_TYPE=simulation; export UAV_TYPE=m690; export GAZEBO_MODEL_PATH=$GAZEBO_MODEL_PATH:~/user_ros_workspace/src/towers_flight/gazebo_models; export WORLD_FILE=./custom_configs/world.yaml; export SENSORS="garmin_down"; export ODOMETRY_TYPE="gps"
 windows:
   - roscore:
       layout: tiled
@@ -10,11 +10,7 @@ windows:
   - gazebo:
       layout: tiled
       panes:
-        # - waitForRos; roslaunch mrs_simulation simulation.launch world_file:="$HOME/user_ros_workspace/src/tmux_scripts/simulation_example/letiste.world" gui:=true
-        # - waitForRos; roslaunch mrs_simulation simulation.launch world_file:="$HOME/user_ros_workspace/src/tmux_scripts/simulation_example/forest.world" gui:=true
-        # - waitForRos; roslaunch mrs_simulation simulation.launch world_file:=letiste.world gui:=true
-        # - waitForRos; roslaunch mrs_simulation simulation.launch world_name:=forest gui:=true
-        - waitForRos; roslaunch mrs_simulation simulation.launch world_name:=forest gui:=true
+        - waitForRos; roslaunch mrs_simulation simulation.launch world_file:="$HOME/user_ros_workspace/src/towers_flight/tmux_scripts/simulation_example/world.world" gui:=true
         - waitForOdometry; gz camera -c gzclient_camera -f uav1; history -s gz camera -c gzclient_camera -f uav1
   - status:
       layout: tiled
